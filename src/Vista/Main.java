@@ -173,7 +173,6 @@ public class Main {
         System.out.println("✔️ La habitación " + numHab + " ahora está libre.");
     }
 
-    // 🔹 Nuevo método para mostrar huéspedes
     private static void mostrarHuespedes(Hotel hotel) {
         System.out.println("\n=== 👥 HUÉSPEDES REGISTRADOS ===");
         for (Reserva r : hotel.getReservas()) {
@@ -196,7 +195,7 @@ public class Main {
         System.out.println("2. Reservar habitación (con pago y botones)");
         System.out.println("3. Ver todas las habitaciones");
         System.out.println("4. Liberar habitación");
-        System.out.println("5. Mostrar todos los huéspedes"); // 🔹 Nuevo
+        System.out.println("5. Mostrar todos los huéspedes");
         System.out.println("0. Salir");
         System.out.print("Seleccione una opción: ");
     }

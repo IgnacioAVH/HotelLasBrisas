@@ -11,7 +11,6 @@ public class Huesped implements Serializable {
     private String telefono;
     private String email;
 
-    // Constructor completo
     public Huesped(int idHuesped, String nombre, String rut, String telefono, String email) {
         this.idHuesped = idHuesped;
         this.nombre = nombre;
@@ -20,12 +19,10 @@ public class Huesped implements Serializable {
         this.email = email;
     }
 
-    // 🔹 Constructor alternativo (solo nombre)
     public Huesped(String nombre) {
         this.nombre = nombre;
     }
 
-    // Getters
     public int getIdHuesped() { return idHuesped; }
     public String getNombre() { return nombre; }
     public String getRut() { return rut; }
