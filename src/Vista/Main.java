@@ -1,6 +1,5 @@
 package Vista;
 import Controller.HotelController;
-import Vista.VistaPrincipal;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
