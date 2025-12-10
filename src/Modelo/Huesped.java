@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Huesped implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int idHuesped;
+    private int idHuesped; // Puede ser autogenerado o usar el RUT como ID lógico
     private String nombre;
     private String rut;
     private String telefono;
@@ -19,13 +19,15 @@ public class Huesped implements Serializable {
         this.email = email;
     }
 
-    public Huesped(String nombre) {
-        this.nombre = nombre;
-    }
-
+    // Getters y Setters
     public int getIdHuesped() { return idHuesped; }
     public String getNombre() { return nombre; }
     public String getRut() { return rut; }
     public String getTelefono() { return telefono; }
     public String getEmail() { return email; }
+
+    @Override
+    public String toString() {
+        return nombre + " (" + rut + ")";
+    }
 }
