@@ -113,4 +113,19 @@ public class HotelController {
         // Retorna la lista histórica de huéspedes guardada en el Hotel
         return hotel.getHistorialHuespedes();
     }
+
+    public void eliminarHuesped(String rut) throws Exception {
+        Huesped h = buscarHuespedPorRut(rut);
+        if (h != null) {
+            // Verificar si el huésped existe y eliminarlo de la lista
+            boolean eliminado = hotel.getHistorialHuespedes().remove(h);
+            if (eliminado) {
+                guardarDatos(); // Guardar cambios en el archivo hotel.dat
+            } else {
+                throw new Exception("No se pudo eliminar al huésped de la lista.");
+            }
+        } else {
+            throw new Exception("Huésped con RUT " + rut + " no encontrado.");
+        }
+    }
 }

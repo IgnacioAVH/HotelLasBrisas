@@ -12,6 +12,7 @@ public class PanelHuespedes extends JPanel {
     private HotelController controlador;
     private VistaPrincipal mainFrame;
     private DefaultTableModel modelo;
+    private JTable tabla;
 
     public PanelHuespedes(HotelController ctrl, VistaPrincipal frame) {
         this.controlador = ctrl;
@@ -19,9 +20,9 @@ public class PanelHuespedes extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // --- Título y Botón Volver ---
+
         JPanel topPanel = new JPanel(new BorderLayout());
-        JLabel titulo = new JLabel("Historial de Huéspedes Registrados", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Gestión de Huéspedes", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 18));
 
         JButton btnVolver = new JButton("< Volver al Menú");
@@ -31,21 +32,61 @@ public class PanelHuespedes extends JPanel {
         topPanel.add(titulo, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
 
-        // --- Tabla de Huéspedes ---
-        // Definimos las columnas
+
         String[] columnas = {"ID", "Nombre", "RUT", "Teléfono", "Email"};
         modelo = new DefaultTableModel(columnas, 0) {
-            @Override // Hacemos que la tabla no sea editable
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        JTable tabla = new JTable(modelo);
+        tabla = new JTable(modelo);
         add(new JScrollPane(tabla), BorderLayout.CENTER);
+
+
+        JPanel panelSur = new JPanel();
+
+        JButton btnEliminar = new JButton("Eliminar Huésped Seleccionado");
+        btnEliminar.setBackground(new Color(255, 100, 100));
+        btnEliminar.setForeground(Color.WHITE);
+
+        btnEliminar.addActionListener(e -> eliminarHuespedSeleccionado());
+
+        panelSur.add(btnEliminar);
+        add(panelSur, BorderLayout.SOUTH);
     }
 
-    // Método para recargar los datos cada vez que entramos a esta pantalla
+
+    private void eliminarHuespedSeleccionado() {
+        int row = tabla.getSelectedRow();
+        if (row != -1) {
+
+            String rut = (String) modelo.getValueAt(row, 2);
+            String nombre = (String) modelo.getValueAt(row, 1);
+
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Estás seguro de eliminar a " + nombre + " (RUT: " + rut + ")?\nEsta acción no se puede deshacer.",
+                    "Confirmar Eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    controlador.eliminarHuesped(rut);
+                    actualizarTabla(); // Recargar la tabla para ver que desapareció
+                    JOptionPane.showMessageDialog(this, "Huésped eliminado correctamente.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un huésped de la lista.");
+        }
+    }
+
     public void actualizarTabla() {
         modelo.setRowCount(0); // Limpiar tabla
         List<Huesped> lista = controlador.obtenerTodosHuespedes();
