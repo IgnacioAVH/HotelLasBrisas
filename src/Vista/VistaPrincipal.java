@@ -28,10 +28,16 @@ public class VistaPrincipal extends JFrame {
         JPanel panelHabitaciones = new PanelHabitaciones(controlador, this);
         JPanel panelReserva = new PanelReserva(controlador, this);
 
+        // --- NUEVO PANEL ---
+        JPanel panelHuespedes = new PanelHuespedes(controlador, this);
+
         // Añadir al CardLayout con nombres clave
         panelContenido.add(panelMenu, "MENU");
         panelContenido.add(panelHabitaciones, "HABITACIONES");
         panelContenido.add(panelReserva, "RESERVA");
+
+        // --- REGISTRAR NUEVO PANEL ---
+        panelContenido.add(panelHuespedes, "HUESPEDES");
 
         add(panelContenido);
     }
@@ -61,6 +67,13 @@ public class VistaPrincipal extends JFrame {
             mostrarVista("RESERVA");
         });
         gbc.gridy = 2; panel.add(btnReserva, gbc);
+
+        JButton btnHuespedes = crearBotonMenu("Ver Lista de Huéspedes");
+        btnHuespedes.addActionListener(e -> {
+            ((PanelHuespedes) panelContenido.getComponent(3)).actualizarTabla();
+            mostrarVista("HUESPEDES");
+        });
+        gbc.gridy = 3; panel.add(btnHuespedes, gbc);
 
         JButton btnSalir = crearBotonMenu("Salir");
         btnSalir.setBackground(new Color(255, 100, 100));

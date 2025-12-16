@@ -108,4 +108,9 @@ public class HotelController {
     public List<Reserva> obtenerHistorialReservas() {
         return hotel.getReservas();
     }
+
+    public List<Huesped> obtenerTodosHuespedes() {
+        // Retorna la lista histórica de huéspedes guardada en el Hotel
+        return hotel.getHistorialHuespedes();
+    }
 }
