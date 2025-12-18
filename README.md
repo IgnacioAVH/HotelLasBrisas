@@ -73,7 +73,7 @@ SistemaHotel/
 │       └── HotelPersistencia.java   # Manejo de archivos y guardado
 ```
 
---- VIDEO SISTEMA DDE HOTELERIA:
+--- VIDEO SISTEMA DE HOTELERIA:
     https://drive.google.com/file/d/12YY3Ld7gRcobUlNDz6fDb5DwMWJWJqHj/view?usp=sharing
 
 ## 📋 Funcionamiento del Sistema
